@@ -3,10 +3,9 @@ function game(){
     const paper = 'Paper';
     const scissors = 'Scissors';
     let playerTurn;
-    let str ='';
     
     let computerRandomNumber = Math.floor(Math.random()*3)+1;
-    let computerTurn
+    let computerTurn;
     switch(computerRandomNumber){
         case 1:
             computerTurn = rock;
