@@ -18,45 +18,40 @@ function game(){
             break;
     }
     
-    const readline = require('readline');
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    })
+    const prompt = require("prompt-sync")({sigint:true});
     
-   let rlFunction = function(){ rl.question("Your turn: ", (answer) => {
-
-        if(answer=='r' || answer == 'rock'){
+    let flag = false;
+    while(!flag){
+        playerTurn = prompt("Your turn: ");
+        if(playerTurn=='r' || playerTurn == 'rock'){
             playerTurn = rock;
+            flag = true;
         }
-        else if(answer=='p' || answer == 'paper'){
+        else if(playerTurn=='p' || playerTurn == 'paper'){
             playerTurn = paper;
+            flag = true;
         }
-        else if(answer=='s' || answer == 'scissors'){
+        else if(playerTurn=='s' || playerTurn == 'scissors'){
             playerTurn = scissors;
+            flag = true;
         }
         else{
-            console.log('Invalid input! Try input...');
-            rlFunction();
+            console.log('Invalid input! Try again...');
         }
-
-    console.log(`The computer chooses ${computerTurn}`);
-
-    if((playerTurn == rock && computerTurn == scissors) || 
-    (playerTurn == scissors && computerTurn == paper) || (playerTurn == paper && computerTurn == rock)){
-        console.log('You win!');
-    } else{
-        console.log('You lose!');
     }
+    if(playerTurn==rock || playerTurn == paper || playerTurn== scissors){
+        console.log(`The computer chooses ${computerTurn}`);
 
-    if((playerTurn == rock && computerTurn == rock) || 
-    (playerTurn == scissors && computerTurn == scissors) || (playerTurn == paper && computerTurn == paper)){
-        console.log('Draw!');
+        if((playerTurn == rock && computerTurn == rock) || 
+        (playerTurn == scissors && computerTurn == scissors) || (playerTurn == paper && computerTurn == paper)){
+            console.log('Draw!');
+        }
+        if((playerTurn == rock && computerTurn == scissors) || 
+        (playerTurn == scissors && computerTurn == paper) || (playerTurn == paper && computerTurn == rock)){
+            console.log('You win!');
+        } else{
+            console.log('You lose!');
+        }
     }
-
-    return rl.close();
-    });
-    }
-    rlFunction();
 }
 game();
